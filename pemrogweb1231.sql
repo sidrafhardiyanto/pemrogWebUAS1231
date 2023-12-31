@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2023 at 10:49 AM
+-- Generation Time: Dec 31, 2023 at 05:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_project_unisnu`
+-- Database: `pemrogweb1231`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,9 @@ INSERT INTO `marital` (`marital_id`, `marital_name`) VALUES
 (1, 'Belum Kawin'),
 (2, 'Kawin'),
 (3, 'Cerai Hidup'),
-(4, 'Cerai Mati');
+(4, 'Cerai Mati'),
+(7, 'Kawin Lari Sama Anime'),
+(8, 'Kawen Sama Senjata Api');
 
 -- --------------------------------------------------------
 
@@ -91419,7 +91421,8 @@ INSERT INTO `religion` (`religion_id`, `religion_name`) VALUES
 (3, 'Katolik'),
 (4, 'Hindu'),
 (5, 'Buddha'),
-(6, 'Konghucu');
+(6, 'Konghucu'),
+(8, 'Menyembah Karung Goni');
 
 -- --------------------------------------------------------
 
@@ -91445,6 +91448,17 @@ CREATE TABLE `user` (
   `citizen_type` enum('WNI','WNA') DEFAULT NULL,
   `issued_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_fullname`, `user_name`, `user_password`, `citizen_id`, `birth_place`, `birth_date`, `gender`, `blood_type`, `address`, `village_id`, `religion_id`, `marital_id`, `job_title`, `citizen_type`, `issued_date`) VALUES
+(8, 'Sidra Kedua', 'sidra2', '76d80224611fc919a5d54f0ff9fba446', '3320111902040001', 'Jepara', '2004-02-19', 'Laki-Laki', 'B', 'isiIniDenganAlamatSayaDenganLengkapDanBenar', '1501212001', 8, 1, 'Wiraswasta', 'WNI', '2023-12-30'),
+(9, 'FullName', 'UserName', '76d80224611fc919a5d54f0ff9fba446', '3320111902040002', 'Jepara', '2004-02-19', 'Laki-Laki', 'B', 'alamat', '3320112001', 1, 1, 'Wiraswasta', 'WNI', '2023-12-31'),
+(10, 'FullName Lagi', 'username aja', '76d80224611fc919a5d54f0ff9fba446', '3320111902040003', 'Jepara', '2004-02-19', 'Laki-Laki', 'B', 'alamat', '3320112001', 2, 1, 'Wirawiri', 'WNI', '2023-12-31'),
+(12, 'asd', 'asd', '7815696ecbf1c96e6894b779456d330e', '5203170112230001', 'asd', '2023-12-01', 'Laki-Laki', 'A', 'asd', '5203171005', 1, 1, 'asd', 'WNI', '2023-12-31'),
+(13, 'qwe', 'qwe', '76d80224611fc919a5d54f0ff9fba446', '2103061902040001', 'qwe', '2004-02-19', 'Laki-Laki', 'AB', 'qwe', '2103061003', 2, 2, 'qwe', 'WNI', '2023-12-31');
 
 --
 -- Indexes for dumped tables
@@ -91506,19 +91520,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `marital`
 --
 ALTER TABLE `marital`
-  MODIFY `marital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `marital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `religion`
 --
 ALTER TABLE `religion`
-  MODIFY `religion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `religion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
