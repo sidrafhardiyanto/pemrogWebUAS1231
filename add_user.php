@@ -36,11 +36,25 @@
 
         $citizen_id = $_POST['district'].$generate_date.'0001';
 
-        if($password != $repassword){
+        if ($password != $repassword) {
             echo "<script>alert('Password dan Konfirmasi Password tidak sesuai!')</script>";
-        }else{
-            $query = "INSERT INTO `user`(`user_fullname`, `user_name`, `user_password`, `citizen_id`, `birth_place`, `birth_date`, `gender`, `blood_type`, `address`, `village_id`, `religion_id`, `marital_id`, `job_title`, `citizen_type`, `issued_date`) VALUES ('$fullname','$username','$md5_password','$citizen_id','$birth_place','$birth_date','$gender','$blood_type','$address','$village_id','$religion_id','$marital_id','$job_title','$citizen_type','$issued_date')";
+        } else {
+            // Modifikasi: Query untuk mendapatkan NIK terakhir dengan kelahiran tempat dan tanggal yang sama
+            $lastNikQuery = "SELECT MAX(SUBSTRING(citizen_id, -4)) AS last_nik FROM user WHERE birth_place = '$district' AND birth_date = '$birth_date';";
+            $lastNikResult = mysqli_query($conn, $lastNikQuery);
+            $lastNikRow = mysqli_fetch_assoc($lastNikResult);
+            $lastNik = $lastNikRow['last_nik'];
+
+            // Modifikasi: Membuat NIK baru dengan menambahkan 1 ke nomor urut NIK terakhir
+            $newNikNumber = ($lastNik != null) ? intval($lastNik) + 1 : 1;
+            $newNikNumberPadded = str_pad($newNikNumber, 4, '0', STR_PAD_LEFT);
+            $citizen_id = $_POST['district'] . $generate_date . $newNikNumberPadded;
+
+            // Query untuk menyisipkan data pengguna ke dalam database
+            $query = "INSERT INTO user(user_fullname, user_name, user_password, citizen_id, birth_place, birth_date, gender, blood_type, address, village_id, religion_id, marital_id, job_title, citizen_type, issued_date) VALUES ('$fullname','$username','$md5_password','$citizen_id','$birth_place','$birth_date','$gender','$blood_type','$address','$village_id','$religion_id','$marital_id','$job_title','$citizen_type','$issued_date')";
+
             $result = mysqli_query($conn, $query);
+
             header("Location: user.php");
             exit();
         }
